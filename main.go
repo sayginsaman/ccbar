@@ -14,25 +14,34 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"io"
 	"os"
 	"time"
 
 	"github.com/saygindoruksaman/ccbar/internal/config"
+	"github.com/saygindoruksaman/ccbar/internal/install"
 	"github.com/saygindoruksaman/ccbar/internal/payload"
 	"github.com/saygindoruksaman/ccbar/internal/pricing"
 	"github.com/saygindoruksaman/ccbar/internal/render"
 	"github.com/saygindoruksaman/ccbar/internal/usage"
 )
 
-const version = "1.0.0"
+// version is overridable at build time via -ldflags "-X main.version=...".
+var version = "1.0.0"
 
 func main() {
 	if len(os.Args) > 1 {
 		switch os.Args[1] {
 		case "--refresh-usage":
 			usage.Refresh(config.Load())
+			return
+		case "install":
+			cmdInstall(os.Args[2:])
+			return
+		case "uninstall":
+			cmdUninstall(os.Args[2:])
 			return
 		case "--init-config":
 			cmdInitConfig()
@@ -88,6 +97,49 @@ func cmdRender() {
 	}
 	if line := render.Build(in); line != "" {
 		fmt.Print(line)
+	}
+}
+
+func cmdInstall(args []string) {
+	fs := flag.NewFlagSet("install", flag.ExitOnError)
+	ri := fs.Int("refresh-interval", 30, "status line refresh interval in seconds (0 to update on events only)")
+	_ = fs.Parse(args)
+
+	res, err := install.Register(*ri)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "ccbar: install failed:", err)
+		os.Exit(1)
+	}
+	_, _, _ = config.WriteDefault() // best-effort default config
+
+	fmt.Println("✓ ccbar is now your Claude Code status line")
+	fmt.Println("  settings:", res.Settings)
+	if res.Backup != "" {
+		fmt.Println("  backup:  ", res.Backup)
+	}
+	fmt.Println("  command: ", res.Command)
+	if res.PrevCommand != "" && res.PrevCommand != res.Command {
+		fmt.Println("  replaced:", res.PrevCommand)
+	}
+	fmt.Println("It appears on your next interaction — no restart needed. Verify with: ccbar --doctor")
+}
+
+func cmdUninstall(args []string) {
+	fs := flag.NewFlagSet("uninstall", flag.ExitOnError)
+	purge := fs.Bool("purge", false, "also delete the ccbar data dir (binary, config, cache)")
+	_ = fs.Parse(args)
+
+	res, err := install.Unregister(*purge)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "ccbar: uninstall failed:", err)
+		os.Exit(1)
+	}
+	fmt.Println("✓ removed ccbar from your Claude Code status line")
+	if res.Backup != "" {
+		fmt.Println("  backup:", res.Backup)
+	}
+	if res.Purged != "" {
+		fmt.Println("  purged:", res.Purged)
 	}
 }
 
@@ -176,10 +228,9 @@ const helpText = `ccbar — Claude Code info bar (statusLine program)
 
 usage:
   ccbar                 render the bar (reads the statusline JSON on stdin)
+  ccbar install         register ccbar as your Claude Code status line (edits settings.json, with backup)
+  ccbar uninstall       remove ccbar from settings.json (use --purge to also delete the data dir)
   ccbar --init-config   write a default config to ~/.claude/ccbar/config.json
   ccbar --doctor        print diagnostics and test the usage endpoint
   ccbar --demo          print a sample bar
-  ccbar --version       print version
-
-Configure Claude Code by adding to ~/.claude/settings.json:
-  "statusLine": { "type": "command", "command": "~/.claude/ccbar/ccbar", "padding": 0 }`
+  ccbar --version       print version`

@@ -3,3 +3,6 @@
 /ccbar.new
 *.test
 *.out
+
+# goreleaser output
+/dist/

@@ -1,7 +1,7 @@
 BIN := ccbar
 INSTALL_DIR := $(HOME)/.claude/ccbar
 
-.PHONY: all build test vet fmt demo install uninstall clean
+.PHONY: all build test vet fmt demo install uninstall release-snapshot clean
 
 all: vet test build
 
@@ -20,11 +20,17 @@ fmt:
 demo: build
 	COLUMNS=$${COLUMNS:-120} ./$(BIN) --demo
 
-install:
-	./install.sh
+# Build from source and register as the Claude Code status line.
+install: build
+	./$(BIN) install
 
-uninstall:
-	./uninstall.sh
+uninstall: build
+	./$(BIN) uninstall
+
+# Dry-run the cross-platform release locally (no publish); needs goreleaser.
+release-snapshot:
+	goreleaser release --snapshot --clean
 
 clean:
 	rm -f $(BIN) $(BIN).new
+	rm -rf dist

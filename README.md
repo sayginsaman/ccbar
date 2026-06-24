@@ -38,43 +38,49 @@ milliseconds, no interpreter, no transcript parsing on the render path.
 
 ## Install
 
-```bash
-./install.sh
-```
+Every method ends with `ccbar install`, which registers the binary in
+`~/.claude/settings.json` (preserving your other settings, with a backup). The bar
+appears on your next interaction — no restart needed.
 
-This builds the binary into `~/.claude/ccbar/ccbar`, writes a default config, and
-registers the statusLine in `~/.claude/settings.json` (with a timestamped backup).
-The bar appears on your next interaction — no restart needed.
-
-Verify and inspect the live data:
+**curl | sh** (macOS/Linux, no Go required — downloads a prebuilt binary):
 
 ```bash
-~/.claude/ccbar/ccbar --doctor
+curl -fsSL https://raw.githubusercontent.com/saygindoruksaman/ccbar/main/install.sh | sh
 ```
 
-### Manual install
+**Homebrew** (macOS/Linux):
 
 ```bash
-make build
-mkdir -p ~/.claude/ccbar && cp ccbar ~/.claude/ccbar/
+brew install saygindoruksaman/tap/ccbar
+ccbar install
 ```
 
-Then add to `~/.claude/settings.json`:
+**go install** (any platform with Go):
 
-```json
-{
-  "statusLine": {
-    "type": "command",
-    "command": "/Users/you/.claude/ccbar/ccbar",
-    "padding": 0,
-    "refreshInterval": 30
-  }
-}
+```bash
+go install github.com/saygindoruksaman/ccbar@latest
+ccbar install
 ```
 
-`refreshInterval` (seconds) keeps the bar fresh while the session is idle (e.g.
-waiting on background agents); the underlying usage endpoint is still only polled
-once per cache TTL. Omit it to update on events only.
+**From source** (clone, then):
+
+```bash
+make install        # go build + ccbar install
+```
+
+Verify and inspect the live data anytime:
+
+```bash
+ccbar --doctor
+```
+
+> Maintainer note: replace `saygindoruksaman/ccbar` with your GitHub `owner/repo`
+> and publish a release + tap — see [RELEASING.md](RELEASING.md). The installer
+> falls back to a source build until prebuilt releases exist.
+
+The status line refreshes on events; `ccbar install --refresh-interval N` (default
+30s) also re-renders while the session is idle (e.g. waiting on background agents).
+The usage endpoint is still only polled once per cache TTL.
 
 ## Where the data comes from
 
@@ -169,6 +175,8 @@ Prices can be overridden without recompiling via `~/.claude/ccbar/pricing.json`
 
 ```
 ccbar                 render the bar (reads stdin) — Claude Code calls this
+ccbar install         register as the status line (edits settings.json, with backup)
+ccbar uninstall       remove from settings.json (--purge also deletes the data dir)
 ccbar --doctor        diagnostics + a read-only test of the usage endpoint
 ccbar --demo          print a sample bar
 ccbar --init-config   write a default config file
@@ -178,8 +186,9 @@ ccbar --version
 ## Uninstall
 
 ```bash
-./uninstall.sh           # remove the statusLine entry (keeps files)
-./uninstall.sh --purge   # also delete ~/.claude/ccbar
+ccbar uninstall          # remove the statusLine entry (keeps files)
+ccbar uninstall --purge  # also delete ~/.claude/ccbar
+brew uninstall ccbar     # if installed via Homebrew
 ```
 
 ## How it works

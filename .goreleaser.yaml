@@ -1,0 +1,61 @@
+# GoReleaser config — produces the cross-platform release assets that install.sh
+# downloads, and (optionally) auto-publishes a Homebrew formula to a tap.
+#
+#   git tag v1.0.0 && git push origin v1.0.0
+#   goreleaser release --clean     # needs GITHUB_TOKEN
+#
+# Asset names match what install.sh expects: ccbar_<os>_<arch>.tar.gz (.zip on Windows).
+version: 2
+
+project_name: ccbar
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: ccbar
+    main: .
+    binary: ccbar
+    env:
+      - CGO_ENABLED=0
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w -X main.version={{ .Version }}
+    goos: [darwin, linux, windows]
+    goarch: [amd64, arm64]
+
+archives:
+  - id: ccbar
+    name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
+    files:
+      - README.md
+      - LICENSE*
+    format_overrides:
+      - goos: windows
+        format: zip
+
+checksum:
+  name_template: "checksums.txt"
+
+release:
+  github:
+    owner: saygindoruksaman
+    name: ccbar
+
+# Optional: auto-generate & push a prebuilt Homebrew formula to <owner>/homebrew-tap.
+# Remove this block if you prefer to hand-maintain Formula/ccbar.rb.
+brews:
+  - name: ccbar
+    repository:
+      owner: saygindoruksaman
+      name: homebrew-tap
+    homepage: "https://github.com/saygindoruksaman/ccbar"
+    description: "Claude Code status-line info bar"
+    license: "MIT"
+    caveats: |
+      Activate with:  ccbar install
+      Remove with:    ccbar uninstall   (then brew uninstall ccbar)
+    test: |
+      system "#{bin}/ccbar", "--version"
