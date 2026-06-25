@@ -1,4 +1,4 @@
-# ccbar — Claude Code info bar
+# ccbar (Claude Code info bar)
 
 A small, fast, **single-line** status bar that lives just below the Claude Code
 input box. It shows, at a glance:
