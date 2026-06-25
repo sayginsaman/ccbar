@@ -53,8 +53,9 @@ Create a repo `github.com/<owner>/homebrew-tap`. Then either:
 
 - **Automated:** let GoReleaser's `brews:` block write `Formula/ccbar.rb` there on
   each release (keeps the version/sha in sync for you), or
-- **Manual:** copy this repo's `Formula/ccbar.rb` into the tap, set `url` to the
-  release source tarball and fill `sha256` (`shasum -a 256`).
+- **Manual:** copy this repo's `Formula/ccbar.rb` into the tap. It is a
+  prebuilt-binary formula pinned to a release; when you bump the version, refresh
+  the per-arch `sha256` values from that release's `checksums.txt`.
 
 Users then run:
 
