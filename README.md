@@ -3,6 +3,10 @@
 A small, fast, **single-line** status bar that lives just below the Claude Code
 input box. It shows, at a glance:
 
+![ccbar status bar in Claude Code — model, last-prompt tokens, last and session cost, and session/weekly/per-model usage limits](docs/screenshot.png)
+
+The segments (the labels below explain each part):
+
 ```
 Opus 4.8 · 55.2k tokens · $0.25 last prompt · $1.84 session · session limit 23% · weekly limit 41% · Opus weekly 60%
 ```
