@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/saygindoruksaman/ccbar/internal/config"
+	"github.com/sayginsaman/ccbar/internal/config"
 )
 
 // realResponse mirrors the actual /api/oauth/usage body shape observed live:

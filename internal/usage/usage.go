@@ -24,7 +24,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/saygindoruksaman/ccbar/internal/config"
+	"github.com/sayginsaman/ccbar/internal/config"
 )
 
 // httpClient gives the refresh a hard total-time backstop in addition to the

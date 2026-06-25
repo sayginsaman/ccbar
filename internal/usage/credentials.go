@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/saygindoruksaman/ccbar/internal/config"
+	"github.com/sayginsaman/ccbar/internal/config"
 )
 
 // credFile mirrors ~/.claude/.credentials.json. expiresAt is a Unix epoch in ms.

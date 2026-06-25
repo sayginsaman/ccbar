@@ -14,11 +14,11 @@
 # (GoReleaser can also generate/update this formula automatically — see .goreleaser.yaml.)
 class Ccbar < Formula
   desc "Claude Code status-line info bar: tokens, cost, session/weekly/per-model limits"
-  homepage "https://github.com/saygindoruksaman/ccbar"
-  url "https://github.com/saygindoruksaman/ccbar/archive/refs/tags/v1.0.0.tar.gz"
+  homepage "https://github.com/sayginsaman/ccbar"
+  url "https://github.com/sayginsaman/ccbar/archive/refs/tags/v1.0.0.tar.gz"
   sha256 "REPLACE_WITH_SOURCE_TARBALL_SHA256"
   license "MIT"
-  head "https://github.com/saygindoruksaman/ccbar.git", branch: "main"
+  head "https://github.com/sayginsaman/ccbar.git", branch: "main"
 
   depends_on "go" => :build
 

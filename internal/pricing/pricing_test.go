@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/saygindoruksaman/ccbar/internal/payload"
+	"github.com/sayginsaman/ccbar/internal/payload"
 )
 
 func approx(a, b float64) bool { return math.Abs(a-b) < 1e-9 }

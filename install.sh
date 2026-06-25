@@ -2,10 +2,10 @@
 # ccbar remote installer — downloads a prebuilt binary (no Go needed) and registers
 # it as your Claude Code status line.
 #
-#   curl -fsSL https://raw.githubusercontent.com/saygindoruksaman/ccbar/main/install.sh | sh
+#   curl -fsSL https://raw.githubusercontent.com/sayginsaman/ccbar/main/install.sh | sh
 #
 # Environment overrides:
-#   CCBAR_REPO         GitHub "owner/repo"     (default: saygindoruksaman/ccbar)
+#   CCBAR_REPO         GitHub "owner/repo"     (default: sayginsaman/ccbar)
 #   CCBAR_VERSION      tag, e.g. v1.2.0         (default: latest)
 #   CCBAR_INSTALL_DIR  where to place the binary (default: ~/.claude/ccbar)
 #   CCBAR_FROM_SOURCE  set to 1 to build from source with Go instead of downloading
@@ -13,7 +13,7 @@
 # Falls back to building from source (needs Go + git) if no prebuilt asset is found.
 set -eu
 
-REPO="${CCBAR_REPO:-saygindoruksaman/ccbar}"
+REPO="${CCBAR_REPO:-sayginsaman/ccbar}"
 VERSION="${CCBAR_VERSION:-latest}"
 INSTALL_DIR="${CCBAR_INSTALL_DIR:-${CLAUDE_CONFIG_DIR:-$HOME/.claude}/ccbar}"
 BIN="$INSTALL_DIR/ccbar"

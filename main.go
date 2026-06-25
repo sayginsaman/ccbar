@@ -20,12 +20,12 @@ import (
 	"os"
 	"time"
 
-	"github.com/saygindoruksaman/ccbar/internal/config"
-	"github.com/saygindoruksaman/ccbar/internal/install"
-	"github.com/saygindoruksaman/ccbar/internal/payload"
-	"github.com/saygindoruksaman/ccbar/internal/pricing"
-	"github.com/saygindoruksaman/ccbar/internal/render"
-	"github.com/saygindoruksaman/ccbar/internal/usage"
+	"github.com/sayginsaman/ccbar/internal/config"
+	"github.com/sayginsaman/ccbar/internal/install"
+	"github.com/sayginsaman/ccbar/internal/payload"
+	"github.com/sayginsaman/ccbar/internal/pricing"
+	"github.com/sayginsaman/ccbar/internal/render"
+	"github.com/sayginsaman/ccbar/internal/usage"
 )
 
 // version is overridable at build time via -ldflags "-X main.version=...".

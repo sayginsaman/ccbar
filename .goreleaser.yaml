@@ -41,7 +41,7 @@ checksum:
 
 release:
   github:
-    owner: saygindoruksaman
+    owner: sayginsaman
     name: ccbar
 
 # Optional: auto-generate & push a prebuilt Homebrew formula to <owner>/homebrew-tap.
@@ -49,9 +49,9 @@ release:
 brews:
   - name: ccbar
     repository:
-      owner: saygindoruksaman
+      owner: sayginsaman
       name: homebrew-tap
-    homepage: "https://github.com/saygindoruksaman/ccbar"
+    homepage: "https://github.com/sayginsaman/ccbar"
     description: "Claude Code status-line info bar"
     license: "MIT"
     caveats: |

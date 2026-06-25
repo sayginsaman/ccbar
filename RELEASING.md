@@ -6,9 +6,9 @@ the binary in `~/.claude/settings.json`):
 - **`curl | sh`** → `install.sh` downloads a prebuilt binary from a GitHub Release.
 - **Homebrew** → a formula in a `homebrew-tap` repo.
 
-> Replace `saygindoruksaman/ccbar` with your real GitHub `owner/repo` in
-> `install.sh`, `Formula/ccbar.rb`, `.goreleaser.yaml`, and `go.mod` before
-> publishing.
+> Repo references are set to `sayginsaman/ccbar` (module path, installer, formula,
+> and release config). If you fork, update those in `go.mod`, `install.sh`,
+> `Formula/ccbar.rb`, and `.goreleaser.yaml`.
 
 ## 1. Cut a release (prebuilt binaries for the curl installer)
 

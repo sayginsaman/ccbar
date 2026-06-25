@@ -45,20 +45,20 @@ appears on your next interaction — no restart needed.
 **curl | sh** (macOS/Linux, no Go required — downloads a prebuilt binary):
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/saygindoruksaman/ccbar/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/sayginsaman/ccbar/main/install.sh | sh
 ```
 
 **Homebrew** (macOS/Linux):
 
 ```bash
-brew install saygindoruksaman/tap/ccbar
+brew install sayginsaman/tap/ccbar
 ccbar install
 ```
 
 **go install** (any platform with Go):
 
 ```bash
-go install github.com/saygindoruksaman/ccbar@latest
+go install github.com/sayginsaman/ccbar@latest
 ccbar install
 ```
 
@@ -74,9 +74,9 @@ Verify and inspect the live data anytime:
 ccbar --doctor
 ```
 
-> Maintainer note: replace `saygindoruksaman/ccbar` with your GitHub `owner/repo`
-> and publish a release + tap — see [RELEASING.md](RELEASING.md). The installer
-> falls back to a source build until prebuilt releases exist.
+> Releasing: publish a GitHub release + Homebrew tap so the prebuilt curl/brew
+> installs work — see [RELEASING.md](RELEASING.md). Until then, the installer
+> automatically falls back to building from source (needs Go + git).
 
 The status line refreshes on events; `ccbar install --refresh-interval N` (default
 30s) also re-renders while the session is idle (e.g. waiting on background agents).

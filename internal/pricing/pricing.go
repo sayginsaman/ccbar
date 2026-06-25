@@ -10,7 +10,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/saygindoruksaman/ccbar/internal/payload"
+	"github.com/sayginsaman/ccbar/internal/payload"
 )
 
 // Rates are USD per million tokens for one model. CacheWrite5m is the default

@@ -13,7 +13,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/saygindoruksaman/ccbar/internal/config"
+	"github.com/sayginsaman/ccbar/internal/config"
 )
 
 // Result describes what an install/uninstall did, for user-facing output.

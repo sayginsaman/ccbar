@@ -1,3 +1,3 @@
-module github.com/saygindoruksaman/ccbar
+module github.com/sayginsaman/ccbar
 
 go 1.24

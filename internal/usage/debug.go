@@ -6,7 +6,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/saygindoruksaman/ccbar/internal/config"
+	"github.com/sayginsaman/ccbar/internal/config"
 )
 
 // DebugStructure fetches /api/oauth/usage and returns a SANITIZED description of
