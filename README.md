@@ -5,21 +5,21 @@ input box. It shows, at a glance:
 
 ![ccbar status bar in Claude Code — model, last-prompt tokens, last and session cost, and session/weekly/per-model usage limits](docs/screenshot.png)
 
-The segments (the labels below explain each part):
+Reading the bar left to right — each segment from the screenshot above:
 
 ```
-Opus 4.8 · 55.2k tokens · $0.25 last prompt · $1.84 session · session limit 23% · weekly limit 41% · Opus weekly 60%
+Opus 4.8 (1M context) · 429.4k tokens · $0.26 last prompt · $63.64 session · session limit 1% · weekly limit 23% · Sonnet weekly 0%
 ```
 
-| Segment              | Meaning |
-| -------------------- | ------- |
-| `Opus 4.8`           | Active model |
-| `55.2k tokens`       | **Tokens used in the last prompt** (input + output + cache read/write) |
-| `$0.25 last prompt`  | **API-equivalent cost of the last prompt** (what it would cost on an API key) |
-| `$1.84 session`      | **API-equivalent cost of the whole session** |
-| `session limit 23%`  | **Current session usage** — the rolling 5-hour limit |
-| `weekly limit 41%`   | **Weekly usage** — the 7-day, all-models limit |
-| `Opus weekly 60%`    | **Per-model weekly usage** ("all models limits") — one per model |
+| Segment                  | What it means |
+| ------------------------ | ------------- |
+| `Opus 4.8 (1M context)`  | Active model and its context-window size (from Claude Code's model name) |
+| `429.4k tokens`          | **Tokens used in the last prompt** — input + output + cache read/write |
+| `$0.26 last prompt`      | **API-equivalent cost of the last prompt** — what it would have cost on an API key |
+| `$63.64 session`         | **API-equivalent cost of the whole session** so far |
+| `session limit 1%`       | **Current session usage** — your rolling 5-hour limit |
+| `weekly limit 23%`       | **Weekly usage** — the 7-day, all-models limit |
+| `Sonnet weekly 0%`       | **Per-model weekly usage** ("all models limits") — one row per model bucket the API reports (here, only Sonnet is active) |
 
 Values are shown in **green**; a limit percentage turns **amber at ≥70%** and
 **red at ≥90%** so pressure is easy to spot. On a narrow terminal the
